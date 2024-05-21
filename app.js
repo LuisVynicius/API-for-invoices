@@ -3,9 +3,9 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
-const routeUser = require('./src/routes/user');
-const routeUserD = require('./src/routes/user_details');
-const routeInvoice = require('./src/routes/invoice');
+const routeUser = require('./src/routes/userRoute');
+const routeUserD = require('./src/routes/userDetailsRoute');
+const routeInvoice = require('./src/routes/invoiceRoute');
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false}));

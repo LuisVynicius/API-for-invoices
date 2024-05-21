@@ -9,7 +9,12 @@ export default class UserRepository implements IUserRepository{
         this.prisma = prisma;
     }
     
-    findAllUsers(): Promise<{ UsuarioID: number; Nome: string; Email: string; Senha: string; DataDeDesativacao: Date | null; }[] | null> {
+    findAllUsers(): Promise<{
+            UsuarioID: number;
+            Nome: string;
+            Email: string;
+            Senha: string;
+            DataDeDesativacao: Date | null; }[] | null> {
         return this.prisma.usuarios.findMany({
             where: {
                 DataDeDesativacao: null
@@ -17,7 +22,12 @@ export default class UserRepository implements IUserRepository{
         });
     }
 
-    findById(UsuarioID: number): Promise<{ UsuarioID: number; Nome: string; Email: string; Senha: string; DataDeDesativacao: Date | null; } | null> {
+    findById(UsuarioID: number): Promise<{
+            UsuarioID: number;
+            Nome: string;
+            Email: string;
+            Senha: string;
+            DataDeDesativacao: Date | null; } | null> {
         return this.prisma.usuarios.findUnique({
             where: {
                 UsuarioID: UsuarioID
@@ -30,7 +40,7 @@ export default class UserRepository implements IUserRepository{
         Email,
         Senha
     }: CreateUserDTO) {
-        this.prisma.usuarios.create({
+        return this.prisma.usuarios.create({
             data: {
                 Nome,
                 Senha,
@@ -39,7 +49,12 @@ export default class UserRepository implements IUserRepository{
         });
     }
 
-    update(user: { UsuarioID: number; Nome: string; Email: string; Senha: string; DataDeDesativacao: Date | null; }): void {
+    update(user: {
+            UsuarioID: number;
+            Nome: string;
+            Email: string;
+            Senha: string;
+            DataDeDesativacao: Date | null; }): void {
         this.prisma.usuarios.update({
             where: {
                 UsuarioID: user.UsuarioID

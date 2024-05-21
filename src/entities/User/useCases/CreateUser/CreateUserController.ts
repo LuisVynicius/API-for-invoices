@@ -14,11 +14,12 @@ export default class CreateUserController {
     ) {
         const { Nome, Email, Senha } = request.body as CreateUserDTO;
 
-        this.createUserUseCase.execute({
+        await this.createUserUseCase.execute({
             Nome,
             Email,
             Senha
         });
+        
         return response.status(201).send({
             Message: "Created User"
         });

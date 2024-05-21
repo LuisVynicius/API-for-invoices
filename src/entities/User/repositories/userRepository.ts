@@ -1,5 +1,6 @@
 import { Usuarios, PrismaClient } from "@prisma/client"
 import { IUserRepository } from "./interfaces/IUserRepository"
+import { CreateUserDTO } from "../useCases/CreateUser/CreateUserDTO";
 
 export default class UserRepository implements IUserRepository{
     private prisma: PrismaClient;
@@ -24,12 +25,16 @@ export default class UserRepository implements IUserRepository{
         });
     }
 
-    async create(user: Usuarios): Promise<{ UsuarioID: number; Nome: string; Email: string; Senha: string; DataDeDesativacao: Date | null; } | null> {
-        return this.prisma.usuarios.create({
+    async create({
+        Nome,
+        Email,
+        Senha
+    }: CreateUserDTO) {
+        this.prisma.usuarios.create({
             data: {
-                Nome: user.Nome,
-                Email: user.Email,
-                Senha: user.Senha
+                Nome,
+                Senha,
+                Email,
             }
         });
     }

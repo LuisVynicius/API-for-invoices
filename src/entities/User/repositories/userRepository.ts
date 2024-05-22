@@ -2,6 +2,7 @@ import { Usuarios, PrismaClient } from "@prisma/client"
 import { IUserRepository } from "./interfaces/IUserRepository"
 import { CreateUserDTO } from "../useCases/CreateUser/CreateUserDTO";
 import { UpdateUserDTO } from "../useCases/UpdateUser/UpdateUserDTO";
+import argon2i from "argon2";
 
 export default class UserRepository implements IUserRepository{
     private prisma: PrismaClient;
@@ -34,7 +35,7 @@ export default class UserRepository implements IUserRepository{
         return this.prisma.usuarios.create({
             data: {
                 Nome,
-                Senha,
+                Senha: await argon2i.hash(Senha),
                 Email,
             }
         });

@@ -11,7 +11,11 @@ export default class UserRepository implements IUserRepository{
     }
     
     findAllUsers() {
-        return this.prisma.usuarios.findMany();
+        return this.prisma.usuarios.findMany({
+            where: {
+                DataDeDesativacao: null
+            }
+        });
     }
 
     findById(UsuarioID: number) {

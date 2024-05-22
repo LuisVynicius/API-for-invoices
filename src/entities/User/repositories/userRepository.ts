@@ -1,6 +1,7 @@
 import { Usuarios, PrismaClient } from "@prisma/client"
 import { IUserRepository } from "./interfaces/IUserRepository"
 import { CreateUserDTO } from "../useCases/CreateUser/CreateUserDTO";
+import { UpdateUserDTO } from "../useCases/UpdateUser/UpdateUserDTO";
 
 export default class UserRepository implements IUserRepository{
     private prisma: PrismaClient;
@@ -9,12 +10,7 @@ export default class UserRepository implements IUserRepository{
         this.prisma = prisma;
     }
     
-    findAllUsers(): Promise<{
-            UsuarioID: number;
-            Nome: string;
-            Email: string;
-            Senha: string;
-            DataDeDesativacao: Date | null; }[] | null> {
+    findAllUsers() {
         return this.prisma.usuarios.findMany({
             where: {
                 DataDeDesativacao: null
@@ -22,12 +18,7 @@ export default class UserRepository implements IUserRepository{
         });
     }
 
-    findById(UsuarioID: number): Promise<{
-            UsuarioID: number;
-            Nome: string;
-            Email: string;
-            Senha: string;
-            DataDeDesativacao: Date | null; } | null> {
+    findById(UsuarioID: number) {
         return this.prisma.usuarios.findUnique({
             where: {
                 UsuarioID: UsuarioID
@@ -49,13 +40,8 @@ export default class UserRepository implements IUserRepository{
         });
     }
 
-    update(user: {
-            UsuarioID: number;
-            Nome: string;
-            Email: string;
-            Senha: string;
-            DataDeDesativacao: Date | null; }): void {
-        this.prisma.usuarios.update({
+    update(user: UpdateUserDTO) {
+        return this.prisma.usuarios.update({
             where: {
                 UsuarioID: user.UsuarioID
             },
@@ -63,8 +49,14 @@ export default class UserRepository implements IUserRepository{
         });
     }
 
-    delete(id: number) {
+    delete(UsuarioID: number) {
+        return this.prisma.usuarios.update({
+            where: {
+                UsuarioID: UsuarioID
+            },
+            data: {
+                DataDeDesativacao: new Date()
+            }
+        });
     }
-    
-    
 }

@@ -20,8 +20,6 @@ export default class CreateUserController {
             Senha
         });
         
-        return response.status(201).send({
-            Message: "Created User"
-        });
+        return response.status(204).send();
     }
 }

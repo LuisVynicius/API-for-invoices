@@ -9,17 +9,8 @@ export default class UserRepository implements IUserRepository{
         this.prisma = prisma;
     }
     
-    findAllUsers(): Promise<{
-            UsuarioID: number;
-            Nome: string;
-            Email: string;
-            Senha: string;
-            DataDeDesativacao: Date | null; }[] | null> {
-        return this.prisma.usuarios.findMany({
-            where: {
-                DataDeDesativacao: null
-            }
-        });
+    findAllUsers() {
+        return this.prisma.usuarios.findMany();
     }
 
     findById(UsuarioID: number) {

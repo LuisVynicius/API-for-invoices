@@ -22,12 +22,7 @@ export default class UserRepository implements IUserRepository{
         });
     }
 
-    findById(UsuarioID: number): Promise<{
-            UsuarioID: number;
-            Nome: string;
-            Email: string;
-            Senha: string;
-            DataDeDesativacao: Date | null; } | null> {
+    findById(UsuarioID: number) {
         return this.prisma.usuarios.findUnique({
             where: {
                 UsuarioID: UsuarioID

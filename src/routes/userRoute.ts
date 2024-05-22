@@ -1,5 +1,6 @@
 import { Router } from "express";
 import CreateUser from "../entities/User/useCases/CreateUser";
+import GetUser from "../entities/User/useCases/GetUser";
 
 const userRouter = Router({ mergeParams: true });
 
@@ -11,9 +12,10 @@ userRouter.get(
 );
 
 userRouter.get(
-    "/:id",
+    "/:UsuarioID",
     async (request, response, next) => {
-
+        const { getUserController } = await GetUser();
+        return getUserController.handle(request, response, next);
     }
 );
 

@@ -6,9 +6,12 @@ export default class GetUserController {
         this.getUserUseCase = getUserUseCase;
     }
 
-    async handle(request: Request, response: Response, next: NextFunction) {
+    async handle(
+            request: Request,
+            response: Response,
+            next: NextFunction
+    ) {
         const { UsuarioID } = request.params;
-        console.log(UsuarioID);
         const user = await this.getUserUseCase.execute(parseInt(UsuarioID));
         return response.status(200).json(user);
     }

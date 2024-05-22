@@ -1,5 +1,5 @@
 export type UpdateUserDTO = {
-    UsuarioID: number;
+    Id: number;
     Nome: string;
     Senha: string;
 };

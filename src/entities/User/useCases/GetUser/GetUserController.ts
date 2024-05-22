@@ -12,8 +12,8 @@ export default class GetUserController {
             response: Response,
             next: NextFunction
     ) {
-        const { UsuarioID } = request.params;
-        const user = await this.getUserUseCase.execute(parseInt(UsuarioID));
+        const { Id } = request.params;
+        const user = await this.getUserUseCase.execute(parseInt(Id));
         
         if (!user || !user.Senha) {
             return response.status(400).json({ error: "Usuário ou senha inválidos." });

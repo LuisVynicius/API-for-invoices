@@ -1,4 +1,4 @@
-import { Usuarios, PrismaClient } from "@prisma/client"
+import { Usuario, PrismaClient } from "@prisma/client"
 import { IUserRepository } from "./interfaces/IUserRepository"
 import { CreateUserDTO } from "../useCases/CreateUser/CreateUserDTO";
 import { UpdateUserDTO } from "../useCases/UpdateUser/UpdateUserDTO";
@@ -12,17 +12,17 @@ export default class UserRepository implements IUserRepository{
     }
     
     findAllUsers() {
-        return this.prisma.usuarios.findMany({
+        return this.prisma.usuario.findMany({
             where: {
                 DataDeDesativacao: null
             }
         });
     }
 
-    findById(UsuarioID: number) {
-        return this.prisma.usuarios.findUnique({
+    findById(Id: number) {
+        return this.prisma.usuario.findUnique({
             where: {
-                UsuarioID: UsuarioID
+                Id: Id
             }
         });
     }
@@ -32,7 +32,7 @@ export default class UserRepository implements IUserRepository{
         Email,
         Senha
     }: CreateUserDTO) {
-        return this.prisma.usuarios.create({
+        return this.prisma.usuario.create({
             data: {
                 Nome,
                 Senha: await argon2i.hash(Senha),
@@ -42,18 +42,18 @@ export default class UserRepository implements IUserRepository{
     }
 
     update(user: UpdateUserDTO) {
-        return this.prisma.usuarios.update({
+        return this.prisma.usuario.update({
             where: {
-                UsuarioID: user.UsuarioID
+                Id: user.Id
             },
             data: user
         });
     }
 
-    delete(UsuarioID: number) {
-        return this.prisma.usuarios.update({
+    delete(Id: number) {
+        return this.prisma.usuario.update({
             where: {
-                UsuarioID: UsuarioID
+                Id: Id
             },
             data: {
                 DataDeDesativacao: new Date()

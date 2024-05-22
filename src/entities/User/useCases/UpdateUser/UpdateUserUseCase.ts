@@ -9,12 +9,12 @@ export default class UpdateUserUseCase {
     }
 
     async execute({
-        UsuarioID,
+        Id,
         Nome,
         Senha
     }: UpdateUserDTO) {
         return await this.userRepository.update({
-            UsuarioID,
+            Id,
             Nome,
             Senha
         });

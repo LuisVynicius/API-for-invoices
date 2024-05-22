@@ -16,7 +16,7 @@ userRouter.get(
 );
 
 userRouter.get(
-    "/:UsuarioID",
+    "/:Id",
     async (request, response, next) => {
         const { getUserController } = await GetUser();
         return getUserController.handle(request, response, next);
@@ -40,7 +40,7 @@ userRouter.put(
 );
 
 userRouter.delete(
-    "/:UsuarioID",
+    "/:Id",
     async (request, response, next) => {
         const { deleteUserController } = await DeleteUser();
         return deleteUserController.handle(request, response, next);

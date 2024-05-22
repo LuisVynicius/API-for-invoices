@@ -7,7 +7,7 @@ export default class DeleteUserUseCase {
         this.userRepository = usersRepository;
     }
 
-    async execute(UsuarioID: number) {
-        return this.userRepository.delete(UsuarioID); 
+    async execute(Id: number) {
+        return this.userRepository.delete(Id); 
     }
 }

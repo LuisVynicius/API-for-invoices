@@ -3,6 +3,7 @@ import { getPrisma } from "./mysql/prisma/prisma";
 import express from "express";
 import router from "./routes";
 import morgan from "morgan";
+import cors from "cors";
 
 const run = async () => {
     const app = express();
@@ -15,6 +16,8 @@ const run = async () => {
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
     
+    app.use(cors());
+
     app.use(router);
 
     const port = 8080;

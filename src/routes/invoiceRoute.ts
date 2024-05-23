@@ -1,32 +1,40 @@
 import { Router } from "express";
+import CreateInvoice from "../entities/Invoice/useCases/CreateInvoice";
+import GetInvoices from "../entities/Invoice/useCases/GetInvoices";
+import GetInvoice from "../entities/Invoice/useCases/GetInvoice";
+import DeleteInvoice from "../entities/Invoice/useCases/DeleteInvoice";
 
 const invoiceRouter = Router({ mergeParams: true });
 
 invoiceRouter.get(
     "/",
     async (request, response, next) => {
-        
+        const { getInvoicesController } = await GetInvoices();
+        return getInvoicesController.handle(request, response, next);
     }
 );
 
 invoiceRouter.get(
-    "/:id",
+    "/:Id",
     async (request, response, next) => {
-
+        const { getInvoiceController } = await GetInvoice();
+        return getInvoiceController.handle(request, response, next);
     }
 );
 
-invoiceRouter.put(
-    "/:id",
+invoiceRouter.post(
+    "/",
     async (request, response, next) => {
-
+        const { createInvoiceController } = await CreateInvoice();
+        createInvoiceController.handle(request, response, next);
     }
 );
 
 invoiceRouter.delete(
-    "/:id",
+    "/:Id",
     async (request, response, next) => {
-
+        const { deleteInvoiceController } = await DeleteInvoice();
+        return deleteInvoiceController.handle(request, response, next);
     }
 )
 

@@ -11,8 +11,9 @@ export default class GetUserController {
             response: Response,
             next: NextFunction
     ) {
-        const { UsuarioID } = request.params;
-        const user = await this.getUserUseCase.execute(parseInt(UsuarioID));
+        const { Id } = request.params;
+        const user = await this.getUserUseCase.execute(parseInt(Id));
+
         return response.status(200).json(user);
     }
 }

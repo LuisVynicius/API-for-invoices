@@ -7,7 +7,7 @@ export default class GetUserUseCase {
         this.userRepository = userRepository;
     }
 
-    async execute(UsuarioID: number) {
-        return this.userRepository.findById(UsuarioID);
+    async execute(Id: number) {
+        return this.userRepository.findById(Id);
     }
 }

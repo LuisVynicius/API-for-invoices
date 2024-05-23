@@ -12,10 +12,10 @@ export default class UpdateUserController {
             response: Response,
             next: NextFunction
         ) {
-        const { UsuarioID, Nome, Senha } = request.body as UpdateUserDTO;
+        const { Id, Nome, Senha } = request.body as UpdateUserDTO;
 
         await this.updateUserUseCase.execute({
-            UsuarioID,
+            Id,
             Nome,
             Senha
         });

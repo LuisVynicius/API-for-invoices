@@ -3,7 +3,20 @@ import { getPrisma } from "./mysql/prisma/prisma";
 import express from "express";
 import router from "./routes";
 import morgan from "morgan";
-import cors from "cors";
+import cors, { CorsOptions } from "cors";
+
+const corsOptions: cors.CorsOptions = {
+    origin: (origin, callback) => {
+        console.log('Origin:', origin);
+        if (origin === `${process.env.ALLOWEDORIGIN}` || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    optionsSuccessStatus: 200
+};
+
 
 const run = async () => {
     const app = express();
@@ -16,7 +29,7 @@ const run = async () => {
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
     
-    app.use(cors());
+    app.use(cors(corsOptions));
 
     app.use(router);
 

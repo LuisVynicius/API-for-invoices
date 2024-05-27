@@ -10,6 +10,15 @@ export default class UserRepository implements IUserRepository{
     constructor(prisma: PrismaClient) {
         this.prisma = prisma;
     }
+
+    findByEmail(email: string) {
+        const user = this.prisma.usuario.findFirst({
+            where: {
+                Email: email
+            }
+        });
+        return user;
+    }
     
     findAllUsers() {
         return this.prisma.usuario.findMany({

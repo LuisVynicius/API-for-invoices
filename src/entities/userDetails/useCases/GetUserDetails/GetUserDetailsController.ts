@@ -15,8 +15,8 @@ export default class GetUserDetailsController {
         try{
             const userDetails = await this.getUserDetailsUseCase.execute(parseInt(Id));
             return response.status(200).json(userDetails);
-        } catch(error: any) {
-            return response.status(404).json({ message: error.message });
+        } catch(error) {
+            return next(error);
         }
     }
 }

@@ -1,3 +1,4 @@
+import { NotFoundError } from "../../../../helpers/api-erros";
 import { IUserDetailsRepository } from "../../repositories/interfaces/IUserDetailsRepository";
 
 export default class GetUserDetailsUseCase {
@@ -10,7 +11,7 @@ export default class GetUserDetailsUseCase {
     async execute(Id: number) {
         const userDetails = await this.userDetailsRepository.findById(Id);
         if (!userDetails) {
-            throw new Error("Detalhes de usuário não encontrado. Id: " + Id);
+            throw new NotFoundError("Detalhes de usuário não encontrado. Id: " + Id);
         }
         return userDetails;
     }

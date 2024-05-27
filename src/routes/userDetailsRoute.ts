@@ -7,16 +7,24 @@ const userDetailsRouter = Router({ mergeParams: true });
 userDetailsRouter.get(
     "/:Id",
     async (request, response, next) => {
-        const { getUserDetailsController } = await GetUserDetails();
-        return getUserDetailsController.handle(request, response, next);
+        try {
+            const { getUserDetailsController } = await GetUserDetails();
+            return getUserDetailsController.handle(request, response, next);
+        } catch(error) {
+            next(error);
+        }
     }
 );
 
 userDetailsRouter.put(
     "/",
     async (request, response, next) => {
-        const { updateUserDetailsController } = await UpdateUserDetails();
-        return updateUserDetailsController.handle(request, response, next);
+        try {
+            const { updateUserDetailsController } = await UpdateUserDetails();
+            return updateUserDetailsController.handle(request, response, next);
+        } catch(error) {
+            next(error);
+        }
     }
 );
 

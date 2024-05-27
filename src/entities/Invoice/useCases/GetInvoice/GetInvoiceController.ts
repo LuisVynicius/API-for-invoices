@@ -11,9 +11,12 @@ export default class GetInvoiceController {
             response: Response,
             next: NextFunction
     ) {
-        const { Id } = request.params;
-        const user = await this.getInvoiceUseCase.execute(parseInt(Id));
-
-        return response.status(200).json(user);
+        try {
+            const { Id } = request.params;
+            const invoice = await this.getInvoiceUseCase.execute(parseInt(Id));
+            return response.status(200).json(invoice);
+        } catch(error) {
+            return next(error);
+        }
     }
 }

@@ -8,10 +8,6 @@ export default class GetUsersUseCase {
     }
 
     async execute() {
-        const users = this.userRepository.findAllUsers();
-        if (!users) {
-            throw new Error("Erro ao buscar usuários");
-        }
-        return users;
+        return this.userRepository.findAllUsers();
     }
 }

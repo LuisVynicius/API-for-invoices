@@ -17,8 +17,12 @@ invoiceRouter.get(
 invoiceRouter.get(
     "/:Id",
     async (request, response, next) => {
-        const { getInvoiceController } = await GetInvoice();
-        return getInvoiceController.handle(request, response, next);
+        try {
+            const { getInvoiceController } = await GetInvoice();
+            return getInvoiceController.handle(request, response, next);
+        } catch(error) {
+            next(error);
+        }
     }
 );
 

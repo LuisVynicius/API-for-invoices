@@ -22,8 +22,8 @@ export default class CreateUserController {
             });
             
             return response.status(201).send();
-        } catch (error: any) {
-            return response.status(409).json({ message: "Falha ao criar usuário" });
+        } catch (error) {
+            return next(error);
         }
     }
 }

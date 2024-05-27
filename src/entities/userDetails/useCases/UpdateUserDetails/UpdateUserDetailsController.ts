@@ -24,8 +24,8 @@ export default class UpdateUserDetailsController {
             });
             
             response.status(204).send();
-        } catch(error: any) {
-            return response.status(404).json({ message: error.message });
+        } catch(error) {
+            return next(error);
         }
     }
 }

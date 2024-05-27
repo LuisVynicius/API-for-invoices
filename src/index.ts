@@ -4,6 +4,7 @@ import express from "express";
 import router from "./routes";
 import morgan from "morgan";
 import cors, { CorsOptions } from "cors";
+import { errorMiddleware } from "./middlewares/error";
 
 const corsOptions: cors.CorsOptions = {
     origin: (origin, callback) => {
@@ -32,6 +33,8 @@ const run = async () => {
     app.use(cors(corsOptions));
 
     app.use(router);
+
+    app.use(errorMiddleware);
 
     const port = 8080;
     const server = app.listen(`${process.env.PORT ?? port}`, () => {

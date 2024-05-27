@@ -37,8 +37,12 @@ invoiceRouter.post(
 invoiceRouter.delete(
     "/:Id",
     async (request, response, next) => {
-        const { deleteInvoiceController } = await DeleteInvoice();
-        return deleteInvoiceController.handle(request, response, next);
+        try {
+            const { deleteInvoiceController } = await DeleteInvoice();
+            return deleteInvoiceController.handle(request, response, next);
+        } catch(error) {
+            next(error);
+        }
     }
 )
 

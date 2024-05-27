@@ -23,3 +23,9 @@ export class ConflictError extends ApiError {
 		super(message, 409)
 	}
 }
+
+export class CorsError extends ApiError {
+	constructor(message: string) {
+		super(message, 403)
+	}
+}

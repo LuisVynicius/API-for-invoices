@@ -12,8 +12,11 @@ export default class GetUserController {
             next: NextFunction
     ) {
         const { Id } = request.params;
-        const user = await this.getUserUseCase.execute(parseInt(Id));
-
-        return response.status(200).json(user);
+        try{
+            const user = await this.getUserUseCase.execute(parseInt(Id));
+            return response.status(200).json(user);
+        } catch (error: any) {
+            return response.status(404).json({ message: error.message });
+        }
     }
 }

@@ -8,6 +8,11 @@ export default class GetUserUseCase {
     }
 
     async execute(Id: number) {
-        return this.userRepository.findById(Id);
+        const user = await this.userRepository.findById(Id);
+        if (!user) {
+            throw new Error("Usuário não encontrado. Id: " + Id);
+        }
+        return user;
     }
+
 }

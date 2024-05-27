@@ -4,6 +4,8 @@ import express from "express";
 import router from "./routes";
 import morgan from "morgan";
 import cors, { CorsOptions } from "cors";
+import { errorMiddleware } from "./middlewares/error";
+import { CorsError } from "./helpers/api-erros";
 
 const corsOptions: cors.CorsOptions = {
     origin: (origin, callback) => {
@@ -11,7 +13,7 @@ const corsOptions: cors.CorsOptions = {
         if (origin === `${process.env.ALLOWEDORIGIN}` || !origin) {
             callback(null, true);
         } else {
-            callback(new Error('Not allowed by CORS'));
+            callback(new CorsError('Not allowed by CORS'));
         }
     },
     optionsSuccessStatus: 200
@@ -32,6 +34,8 @@ const run = async () => {
     app.use(cors(corsOptions));
 
     app.use(router);
+
+    app.use(errorMiddleware);
 
     const port = 8080;
     const server = app.listen(`${process.env.PORT ?? port}`, () => {

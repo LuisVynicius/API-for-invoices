@@ -3,6 +3,7 @@ import { IUserRepository } from "../../repositories/interfaces/IUserRepository";
 import { CreateUserDTO } from "./CreateUserDTO";
 import CreateUserDetailsUseCase from "../../../userDetails/useCases/CreateUserDetails/CreateUserDetailsUseCase";
 import UserDetailsRepository from "../../../userDetails/repositories/userDetailsRepository";
+import { ConflictError } from "../../../../helpers/api-erros";
 
 export default class CreateUserUseCase {
     private userRepository: IUserRepository;
@@ -20,14 +21,22 @@ export default class CreateUserUseCase {
         Email,
         Senha
     }: CreateUserDTO) {
+        
+        const userExist = await this.userRepository.findByEmail(Email);
+
+        if (userExist) {
+            throw new ConflictError("Email já utilizado");
+        }
+
         const user =  await this.userRepository.create({
             Nome,
             Senha,
             Email
         });
+        
 
         if (!user || !user.Id) {
-            throw new Error("Falha ao criar usuário");
+            throw new Error();
         }
         
         this.createUserDetailsUseCase.execute(user.Id);

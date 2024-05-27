@@ -11,8 +11,12 @@ export default class DeleteUserController {
             response: Response,
             next: NextFunction
     ) {
-        const { Id } = request.params;
-        await this.deleteUserUseCase.execute(parseInt(Id));
-        return response.status(204).send();
+        try {
+            const { Id } = request.params;
+            await this.deleteUserUseCase.execute(parseInt(Id));
+            return response.status(204).send();
+        } catch (error){
+            return next(error);
+        }
     }
 }

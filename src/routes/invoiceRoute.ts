@@ -17,8 +17,12 @@ invoiceRouter.get(
 invoiceRouter.get(
     "/:Id",
     async (request, response, next) => {
-        const { getInvoiceController } = await GetInvoice();
-        return getInvoiceController.handle(request, response, next);
+        try {
+            const { getInvoiceController } = await GetInvoice();
+            return getInvoiceController.handle(request, response, next);
+        } catch(error) {
+            next(error);
+        }
     }
 );
 
@@ -33,8 +37,12 @@ invoiceRouter.post(
 invoiceRouter.delete(
     "/:Id",
     async (request, response, next) => {
-        const { deleteInvoiceController } = await DeleteInvoice();
-        return deleteInvoiceController.handle(request, response, next);
+        try {
+            const { deleteInvoiceController } = await DeleteInvoice();
+            return deleteInvoiceController.handle(request, response, next);
+        } catch(error) {
+            next(error);
+        }
     }
 )
 

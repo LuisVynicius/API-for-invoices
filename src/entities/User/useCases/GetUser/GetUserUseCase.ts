@@ -1,3 +1,4 @@
+import { NotFoundError } from "../../../../helpers/api-erros";
 import { IUserRepository } from "../../repositories/interfaces/IUserRepository";
 
 export default class GetUserUseCase {
@@ -8,6 +9,11 @@ export default class GetUserUseCase {
     }
 
     async execute(Id: number) {
-        return this.userRepository.findById(Id);
+        const user = await this.userRepository.findById(Id);
+        if (!user) {
+            throw new NotFoundError("Usuário não encontrado. Id: " + Id);
+        }
+        return user;
     }
+
 }

@@ -20,11 +20,12 @@ export default class UserRepository implements IUserRepository{
     }
 
     findById(Id: number) {
-        return this.prisma.usuario.findUnique({
+        const user = this.prisma.usuario.findUnique({
             where: {
                 Id: Id
             }
         });
+        return user;
     }
 
     async create({
@@ -41,12 +42,16 @@ export default class UserRepository implements IUserRepository{
         });
     }
 
-    update(user: UpdateUserDTO) {
+    async update(user: UpdateUserDTO) {
         return this.prisma.usuario.update({
             where: {
                 Id: user.Id
             },
-            data: user
+            data: {
+                Nome: user.Nome,
+                Senha: await argon2i.hash(user.Senha)
+                
+            }
         });
     }
 

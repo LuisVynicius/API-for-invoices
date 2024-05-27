@@ -8,6 +8,10 @@ export default class GetUserDetailsUseCase {
     }
 
     async execute(Id: number) {
-        return this.userDetailsRepository.findById(Id);
+        const userDetails = await this.userDetailsRepository.findById(Id);
+        if (!userDetails) {
+            throw new Error("Detalhes de usuário não encontrado. Id: " + Id);
+        }
+        return userDetails;
     }
 }

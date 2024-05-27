@@ -14,14 +14,18 @@ export default class UpdateUserDetailsController {
     ) {
         const { UsuarioID, CPF, Sobrenome, NumeroTelefone, Sexo } = request.body as UsuarioDetalhes;
 
-        await this.updateUserDetailsUseCase.execute({
-            UsuarioID,
-            CPF,
-            NumeroTelefone,
-            Sexo,
-            Sobrenome
-        });
-        
-        response.status(204).send();
+        try {
+            await this.updateUserDetailsUseCase.execute({
+                UsuarioID,
+                CPF,
+                NumeroTelefone,
+                Sexo,
+                Sobrenome
+            });
+            
+            response.status(204).send();
+        } catch(error: any) {
+            return response.status(404).json({ message: error.message });
+        }
     }
 }

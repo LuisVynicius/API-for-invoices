@@ -12,14 +12,18 @@ export default class CreateUserController {
         response: Response,
         next: NextFunction
     ) {
-        const { Nome, Email, Senha } = request.body as CreateUserDTO;
+        try {
+            const { Nome, Email, Senha } = request.body as CreateUserDTO;
 
-        await this.createUserUseCase.execute({
-            Nome,
-            Email,
-            Senha
-        });
-        
-        return response.status(201).send();
+            await this.createUserUseCase.execute({
+                Nome,
+                Email,
+                Senha
+            });
+            
+            return response.status(201).send();
+        } catch (error: any) {
+            return response.status(409).json({ message: "Falha ao criar usuário" });
+        }
     }
 }

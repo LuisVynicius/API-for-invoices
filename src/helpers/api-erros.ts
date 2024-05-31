@@ -29,3 +29,9 @@ export class CorsError extends ApiError {
 		super(message, 403)
 	}
 }
+
+export class CredentialsError extends ApiError {
+	constructor(message: string) {
+		super(message, 400)
+	}
+}

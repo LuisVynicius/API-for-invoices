@@ -15,7 +15,7 @@ export default class GetUserController {
         try {
             const { Email, password } = request.body;
             const token = await this.loginUserUseCase.execute(Email, password);
-            return response.status(200).json({tkn: token});
+            return response.status(200).json({tkn: "Bearer " + token});
         } catch(error) {
            return next(error);
         }

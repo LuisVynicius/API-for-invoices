@@ -7,13 +7,13 @@ import { errorMiddleware } from "./middlewares/error";
 import { CorsError } from "./helpers/api-erros";
 
 const corsOptions: cors.CorsOptions = {
-    origin: (origin, callback) => {
+    origin: "*",/*(origin, callback) => {
         if (origin === `${process.env.ALLOWEDORIGIN}` || !origin) {
             callback(null, true);
         } else {
             callback(new CorsError('Not allowed by CORS'));
         }
-    },
+    },*/
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     optionsSuccessStatus: 200
 };

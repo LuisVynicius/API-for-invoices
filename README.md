@@ -23,9 +23,7 @@ Para a criação do backend foram utilizadas as seguintes tecnologias:
 
 ```bash
 # Como feito em muitas outras aplicações, não disponibilizei o .env no github, então para a inicialização do backend será necessário a criação do arquivo .env com as seguintes variáveis de ambiente:
-  DATABASE_URL=
   ALLOWEDORIGIN=
-  SECRET=
 
 # Após isso execute o comando para a instalação de todas as dependências:
 $ npm install

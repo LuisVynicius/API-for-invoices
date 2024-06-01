@@ -22,7 +22,7 @@ Para a criação do backend foram utilizadas as seguintes tecnologias:
 ## Executando
 
 ```bash
-# Como feito em muitas outras aplicações, não disponibilizei o .env no github, então para a inicialização do backend será necessário a criação do arquivo .env com as seguintes variáveis de ambiente:
+# Como feito em muitas outras aplicações, não disponibilizei o .env no github, então para a inicialização do backend será necessário a criação do arquivo .env com a seguinte variável de ambiente:
   ALLOWEDORIGIN=
 
 # Após isso execute o comando para a instalação de todas as dependências:

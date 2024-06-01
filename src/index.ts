@@ -14,6 +14,7 @@ const corsOptions: cors.CorsOptions = {
             callback(new CorsError('Not allowed by CORS'));
         }
     },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     optionsSuccessStatus: 200
 };
 

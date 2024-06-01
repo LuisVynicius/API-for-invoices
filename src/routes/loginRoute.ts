@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { getPrisma } from "../mysql/prisma/prisma";
 import GetLogin from "../entities/User/useCases/LoginUser";
 
 const loginRouter = Router({ mergeParams: true });

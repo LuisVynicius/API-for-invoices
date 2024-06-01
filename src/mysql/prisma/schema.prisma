@@ -9,15 +9,15 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:dev.db"
 }
 
 model Usuario {
   Id                  Int             @id @default(autoincrement()) @unique
-  Nome                String          @db.VarChar(100)
-  Email               String          @db.VarChar(100) @unique
-  Senha               String          @db.VarChar(100)
+  Nome                String           
+  Email               String          @unique
+  Senha               String          
   DataDeDesativacao   DateTime?
   Detalhes            UsuarioDetalhes?
   NotasFiscais        NotaFiscal[]
@@ -26,10 +26,10 @@ model Usuario {
 
 model UsuarioDetalhes {
   UsuarioID           Int             @id             @unique
-  CPF                 String          @db.VarChar(14) @unique
-  Sobrenome           String          @db.VarChar(100)
-  NumeroTelefone      String?         @db.VarChar(20)
-  Sexo                String?         @db.VarChar(1)
+  CPF                 String          @unique
+  Sobrenome           String          
+  NumeroTelefone      String?          
+  Sexo                String?         
   Usuario             Usuario         @relation(fields: [UsuarioID], references: [Id])
   @@index([CPF], name: "IDX_CPF")
 }

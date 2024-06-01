@@ -1,5 +1,4 @@
 import bodyParser from "body-parser";
-import { getPrisma } from "./mysql/prisma/prisma";
 import express from "express";
 import router from "./routes";
 import morgan from "morgan";
@@ -22,7 +21,6 @@ const corsOptions: cors.CorsOptions = {
 
 const run = async () => {
     const app = express();
-    const prisma = await getPrisma();
     
     app.disable("x-powered-by");
 

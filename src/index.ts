@@ -8,7 +8,6 @@ import { CorsError } from "./helpers/api-erros";
 
 const corsOptions: cors.CorsOptions = {
     origin: (origin, callback) => {
-        console.log('Origin:', origin);
         if (origin === `${process.env.ALLOWEDORIGIN}` || !origin) {
             callback(null, true);
         } else {

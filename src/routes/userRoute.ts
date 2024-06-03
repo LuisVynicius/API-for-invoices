@@ -4,7 +4,6 @@ import GetUser from "../entities/User/useCases/GetUser";
 import GetUsers from "../entities/User/useCases/GetUsers";
 import UpdateUser from "../entities/User/useCases/UpdateUser";
 import DeleteUser from "../entities/User/useCases/DeleteUser";
-import { NotFoundError } from "../helpers/api-erros";
 
 const userRouter = Router({ mergeParams: true });
 

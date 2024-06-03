@@ -14,13 +14,17 @@ export default class CreateInvoiceController {
     ) {
         const { NumeroNotaFiscal, DataNotaFiscal, Valor, UsuarioID } = request.body as CreateInvoiceDTO;
     
-        await this.createInvoiceUseCase.execute({
+        try{
+            await this.createInvoiceUseCase.execute({
             NumeroNotaFiscal,
             DataNotaFiscal,
             Valor,
             UsuarioID
-        });
+            });
+            return response.status(201).send();
+        } catch (error) {
+            return next(error);
+        }
 
-        return response.status(201).send();
     }
 }

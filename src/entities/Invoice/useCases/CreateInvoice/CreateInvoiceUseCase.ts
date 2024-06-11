@@ -1,4 +1,3 @@
-import { PrismaClient } from "@prisma/client";
 import { IInvoiceRepository } from "../../repositories/interfaces/IInvoiceRepository";
 import { CreateInvoiceDTO } from "./CreateInvoiceDTO";
 import GetUserUseCase from "../../../User/useCases/GetUser/GetUserUseCase";
@@ -18,10 +17,11 @@ export default class CreateInvoiceUseCase {
         Valor,
         UsuarioID
     }: CreateInvoiceDTO) {
-        const user = await this.getUserUseCase.execute(UsuarioID);
+        const dataNotaFiscalGMT = new Date(DataNotaFiscal).toISOString();
+
         return this.invoiceRepository.create({
             NumeroNotaFiscal,
-            DataNotaFiscal,
+            DataNotaFiscal: new Date(dataNotaFiscalGMT),
             Valor,
             UsuarioID
         });

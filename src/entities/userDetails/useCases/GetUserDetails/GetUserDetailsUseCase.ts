@@ -1,17 +1,23 @@
 import { NotFoundError } from "../../../../helpers/api-erros";
+import GetUserUseCase from "../../../User/useCases/GetUser/GetUserUseCase";
 import { IUserDetailsRepository } from "../../repositories/interfaces/IUserDetailsRepository";
 
 export default class GetUserDetailsUseCase {
     private userDetailsRepository: IUserDetailsRepository;
+    private getUserUseCase;
 
-    constructor(userDetailsRepository: IUserDetailsRepository) {
+    constructor(userDetailsRepository: IUserDetailsRepository, getUserUseCase: GetUserUseCase) {
         this.userDetailsRepository = userDetailsRepository;
+        this.getUserUseCase = getUserUseCase;
     }
 
-    async execute(Id: number) {
-        const userDetails = await this.userDetailsRepository.findById(Id);
+    async execute(token: any) {
+
+        const user = await this.getUserUseCase.execute(token);
+        console.log("Usuário: " + user.Nome);
+        const userDetails = await this.userDetailsRepository.findById(user.Id);
         if (!userDetails) {
-            throw new NotFoundError("Detalhes de usuário não encontrado. Id: " + Id);
+            throw new NotFoundError("Detalhes de usuário não encontrado. Id: " + user.Id);
         }
         return userDetails;
     }

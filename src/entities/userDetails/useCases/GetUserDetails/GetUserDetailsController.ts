@@ -11,9 +11,16 @@ export default class GetUserDetailsController {
         response: Response,
         next: NextFunction
     ) {
-        const { Id } = request.params;
+        const authHeader = request.headers.authorization;
+            
+        if (!authHeader) {
+            throw new Error('Token de autenticação não fornecido');
+        }
+        
+        const token = authHeader.split(" ")[1];
+
         try{
-            const userDetails = await this.getUserDetailsUseCase.execute(parseInt(Id));
+            const userDetails = await this.getUserDetailsUseCase.execute(token);
             return response.status(200).json(userDetails);
         } catch(error) {
             return next(error);

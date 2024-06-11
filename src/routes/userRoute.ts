@@ -16,7 +16,7 @@ userRouter.get(
 );
 
 userRouter.get(
-    "/:Id",
+    "/token",
     async (request, response, next) => {
         try{
             const { getUserController } = await GetUser();

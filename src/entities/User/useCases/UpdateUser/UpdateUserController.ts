@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import UpdateUserUseCase from "./UpdateUserUseCase";
 import { UpdateUserDTO } from "./UpdateUserDTO";
-import { argon2i } from "argon2";
 
 export default class UpdateUserController {
     constructor(private updateUserUseCase: UpdateUserUseCase) {

@@ -1,5 +1,4 @@
 import prisma from "../../../../mysql/prisma/prisma";
-import CreateUserDetailsUseCase from "../../../userDetails/useCases/CreateUserDetails/CreateUserDetailsUseCase";
 import UserRepository from "../../repositories/userRepository";
 import CreateUserController from "./CreateUserController";
 import CreateUserUseCase from "./CreateUserUseCase";

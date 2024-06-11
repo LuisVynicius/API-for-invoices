@@ -1,4 +1,3 @@
-import GetUserUseCase from "../../../User/useCases/GetUser/GetUserUseCase";
 import { IInvoiceRepository } from "../../repositories/interfaces/IInvoiceRepository";
 import GetInvoiceUseCase from "../GetInvoice/GetInvoiceUseCase";
 

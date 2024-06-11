@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 import GetUserUseCase from "./GetUserUseCase";
-import { NotFoundError } from "../../../../helpers/api-erros";
 
 export default class GetUserController {
     constructor(private getUserUseCase: GetUserUseCase) {

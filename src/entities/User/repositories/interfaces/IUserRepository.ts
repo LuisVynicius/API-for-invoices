@@ -7,6 +7,6 @@ export interface IUserRepository {
     findById(id: number): Promise<Usuario | null>;
     findByEmail(email: string): Promise<Usuario | null>;
     create(user: CreateUserDTO): Promise<Usuario | null>;
-    update(user: UpdateUserDTO): void;
+    update(Id: number, Nome: string, Senha: string): void;
     delete(id: number): void;
 }

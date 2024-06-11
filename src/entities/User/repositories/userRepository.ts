@@ -51,15 +51,14 @@ export default class UserRepository implements IUserRepository{
         });
     }
 
-    async update(user: UpdateUserDTO) {
+    async update(Id: number, Nome: string, Senha: string) {
         return this.prisma.usuario.update({
             where: {
-                Id: user.Id
+                Id: Id
             },
             data: {
-                Nome: user.Nome,
-                Senha: await argon2i.hash(user.Senha)
-                
+                Nome: Nome,
+                Senha: await argon2i.hash(Senha)
             }
         });
     }

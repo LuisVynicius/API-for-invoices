@@ -14,7 +14,6 @@ export default class GetUserDetailsUseCase {
     async execute(token: any) {
 
         const user = await this.getUserUseCase.execute(token);
-        console.log("Usuário: " + user.Nome);
         const userDetails = await this.userDetailsRepository.findById(user.Id);
         if (!userDetails) {
             throw new NotFoundError("Detalhes de usuário não encontrado. Id: " + user.Id);

@@ -14,16 +14,15 @@ export default class CreateInvoiceUseCase {
     async execute({
         NumeroNotaFiscal,
         DataNotaFiscal,
-        Valor,
-        UsuarioID
-    }: CreateInvoiceDTO) {
+        Valor
+    }: CreateInvoiceDTO, token : any) {
         const dataNotaFiscalGMT = new Date(DataNotaFiscal).toISOString();
-
+        const user = await this.getUserUseCase.execute(token);
         return this.invoiceRepository.create({
             NumeroNotaFiscal,
             DataNotaFiscal: new Date(dataNotaFiscalGMT),
             Valor,
-            UsuarioID
+            UsuarioID: user.Id
         });
     }
 }

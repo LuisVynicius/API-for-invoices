@@ -9,8 +9,12 @@ export default class UserRepository implements IInvoiceRepository {
         this.prisma = prisma;
     }
     
-    findAllInvoices() {
-        return this.prisma.notaFiscal.findMany();
+    findAllInvoices(Id: number) {
+        return this.prisma.notaFiscal.findMany({
+            where: {
+                UsuarioID: Id
+            }
+        });
     }
     findById(id: number) {
         return this.prisma.notaFiscal.findUnique({

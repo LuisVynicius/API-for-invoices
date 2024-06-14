@@ -16,16 +16,5 @@ userDetailsRouter.get(
     }
 );
 
-userDetailsRouter.put(
-    "/",
-    async (request, response, next) => {
-        try {
-            const { updateUserDetailsController } = await UpdateUserDetails();
-            return updateUserDetailsController.handle(request, response, next);
-        } catch(error) {
-            next(error);
-        }
-    }
-);
 
 export default userDetailsRouter;

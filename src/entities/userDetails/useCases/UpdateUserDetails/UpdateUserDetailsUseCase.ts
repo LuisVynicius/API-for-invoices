@@ -17,8 +17,8 @@ export default class UpdateUserDetailsUseCase {
         Sobrenome,
         NumeroTelefone,
         Sexo
-    }: UsuarioDetalhes) {
-        const userDetails = await this.getUserDetailsUseCase.execute(UsuarioID);
+    }: UsuarioDetalhes, token: any) {
+        const userDetails = await this.getUserDetailsUseCase.execute(token);
         return await this.userDetailsRepository.update({
             UsuarioID,
             CPF,

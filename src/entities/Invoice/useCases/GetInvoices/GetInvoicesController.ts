@@ -7,8 +7,12 @@ export default class getInvoicesController {
     }
 
     async handle(request: Request, response: Response, next: NextFunction) {
-        const invoices = await this.getInvoiceUseCase.execute();
-        
+        const authHeader = request.headers.authorization;   
+        if (!authHeader) {
+            throw new Error('Token de autenticação não fornecido');
+        }
+        const token = authHeader.split(" ")[1];
+        const invoices = await this.getInvoiceUseCase.execute(token);
         return response.status(200).json(invoices);
     }
 }

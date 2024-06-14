@@ -13,11 +13,9 @@ export default class GetUserController {
     ) {
         try {
             const authHeader = request.headers.authorization;
-            
             if (!authHeader) {
                 throw new Error('Token de autenticação não fornecido');
             }
-            
             const token = authHeader.split(" ")[1];
             const user = await this.getUserUseCase.execute(token);
             return response.status(200).json(user);

@@ -3,6 +3,7 @@ import CreateInvoice from "../entities/Invoice/useCases/CreateInvoice";
 import GetInvoices from "../entities/Invoice/useCases/GetInvoices";
 import GetInvoice from "../entities/Invoice/useCases/GetInvoice";
 import DeleteInvoice from "../entities/Invoice/useCases/DeleteInvoice";
+import GetInvoicesByDate from "../entities/Invoice/useCases/GetInvoices copy";
 
 const invoiceRouter = Router({ mergeParams: true });
 
@@ -11,6 +12,14 @@ invoiceRouter.get(
     async (request, response, next) => {
         const { getInvoicesController } = await GetInvoices();
         return getInvoicesController.handle(request, response, next);
+    }
+);
+
+invoiceRouter.get(
+    "/date",
+    async (request, response, next) => {
+        const { getInvoicesByDateController } = await GetInvoicesByDate();
+        return getInvoicesByDateController.handle(request, response, next);
     }
 );
 

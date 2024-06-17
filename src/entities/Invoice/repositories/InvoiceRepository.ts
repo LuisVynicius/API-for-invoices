@@ -9,6 +9,18 @@ export default class UserRepository implements IInvoiceRepository {
         this.prisma = prisma;
     }
     
+    findInvoicesByDate(startDate: Date, endDate: Date, Id: number) {
+        return this.prisma.notaFiscal.findMany({
+            where: {
+                DataNotaFiscal: {
+                    gte: startDate,
+                    lte: endDate,
+                },
+                UsuarioID: Id
+            },
+        });
+    }
+
     findAllInvoices(Id: number) {
         return this.prisma.notaFiscal.findMany({
             where: {

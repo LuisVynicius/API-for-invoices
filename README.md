@@ -18,6 +18,7 @@ Para a criação do backend foram utilizadas as seguintes tecnologias:
 - [Prisma](https://www.prisma.io/)
 - [JSON Web Token](https://www.npmjs.com/package/jsonwebtoken)
 - [CORS](https://www.npmjs.com/package/cors)
+- [Moment-timezone](https://https://momentjs.com/timezone/docs/)
 
 ## Executando
 
